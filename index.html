@@ -34,7 +34,7 @@
     font-family:'Space Mono',monospace;
     display:flex;flex-direction:column;
     max-width:480px;margin:0 auto;
-    min-height:100dvh;
+    height:100dvh;
     overscroll-behavior:none;
   }
 
@@ -57,7 +57,7 @@
 
   /* ---- Metrónomo activo ---- */
   .stage{
-    padding:24px 20px 20px;
+    padding:12px 20px 12px;
     border-bottom:1px solid var(--line);
     background:
       radial-gradient(120% 80% at 50% -20%, rgba(255,138,61,0.10), transparent 60%),
@@ -66,31 +66,31 @@
   .now-label{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;}
   .now-title{
     font-family:'Archivo Expanded',sans-serif;font-weight:600;
-    font-size:22px;margin-top:4px;line-height:1.1;
+    font-size:19px;margin-top:2px;line-height:1.1;
     min-height:26px;
   }
   .now-title.empty{color:var(--dim);font-weight:600;}
 
   .dial{
     display:flex;align-items:center;justify-content:center;
-    gap:18px;margin:22px 0 6px;
+    gap:18px;margin:8px 0 0;
   }
   .bpm-big{
     font-family:'Archivo Expanded',sans-serif;font-weight:800;
-    font-size:84px;line-height:0.9;letter-spacing:-3px;
+    font-size:60px;line-height:0.95;letter-spacing:-2px;
     font-variant-numeric:tabular-nums;
   }
   .bpm-unit{font-size:13px;color:var(--dim);letter-spacing:2px;}
 
   .pulse{
-    width:60px;height:60px;border-radius:50%;
+    width:18px;height:18px;border-radius:50%;
     border:2px solid var(--line);
     display:flex;align-items:center;justify-content:center;
     flex-shrink:0;transition:transform .05s,background .05s,border-color .05s;
   }
   .pulse.hit{background:var(--beat);border-color:var(--beat);transform:scale(1.12);}
   .pulse.hit.one{background:var(--amber);border-color:var(--amber);}
-  .pulse-dots{display:flex;gap:5px;justify-content:center;margin-top:14px;}
+  .pulse-dots{display:flex;gap:5px;justify-content:center;margin-top:8px;}
   .pulse-dots i{
     width:8px;height:8px;border-radius:50%;background:var(--line);
     transition:background .05s;
@@ -98,9 +98,9 @@
   .pulse-dots i.on{background:var(--beat);}
   .pulse-dots i.on.first{background:var(--amber);}
 
-  .transport{display:flex;gap:10px;margin-top:18px;}
+  .transport{display:flex;gap:10px;margin-top:10px;}
   .btn{
-    flex:1;border:none;border-radius:12px;padding:16px;
+    flex:1;border:none;border-radius:12px;padding:12px;
     font-family:'Space Mono',monospace;font-weight:700;font-size:15px;
     letter-spacing:1px;text-transform:uppercase;cursor:pointer;
     background:var(--line);color:var(--ink);transition:filter .1s;
@@ -111,7 +111,7 @@
   .btn:disabled{opacity:.35;cursor:default;}
 
   .nudge{
-    width:52px;height:52px;border-radius:12px;border:1px solid var(--line);
+    width:46px;height:46px;border-radius:12px;border:1px solid var(--line);
     background:transparent;color:var(--ink);font-size:24px;font-weight:700;cursor:pointer;flex-shrink:0;
   }
   .nudge:active{background:var(--line);}
@@ -119,9 +119,9 @@
   .song .name sup{color:var(--amber);font-size:13px;margin-left:2px;}
   .foot{font-size:11px;color:var(--dim);text-align:center;padding:14px 0 4px;line-height:1.6;}
   .foot sup{color:var(--amber);}
-  .tweak{display:flex;align-items:center;gap:10px;margin-top:12px;}
+  .tweak{display:flex;align-items:center;gap:10px;margin-top:8px;}
   .tweak button{
-    width:46px;height:46px;border-radius:10px;border:1px solid var(--line);
+    width:40px;height:36px;border-radius:10px;border:1px solid var(--line);
     background:transparent;color:var(--ink);font-size:22px;font-weight:700;cursor:pointer;
   }
   .tweak button:active{background:var(--line);}
@@ -134,7 +134,7 @@
   .list{flex:1;overflow-y:auto;padding:6px 14px 14px;}
   .song{
     display:flex;align-items:center;gap:12px;
-    padding:14px 12px;border-bottom:1px solid var(--line);
+    padding:10px 12px;border-bottom:1px solid var(--line);
     cursor:pointer;border-radius:10px;
   }
   .song:active{background:var(--panel);}
@@ -160,7 +160,7 @@
   }
   .add input{
     background:var(--bg);border:1px solid var(--line);border-radius:10px;
-    color:var(--ink);font-family:'Space Mono';font-size:15px;padding:13px 12px;
+    color:var(--ink);font-family:'Space Mono';font-size:15px;padding:10px 12px;
   }
   .add input.name{flex:1;min-width:0;}
   .add input.bpm{width:74px;text-align:center;font-weight:700;}
@@ -189,8 +189,7 @@
       </div>
       <button class="nudge" id="bpmUp" disabled aria-label="Subir 1 BPM">+</button>
     </div>
-    <div style="display:flex;justify-content:center;margin-top:10px"><div class="pulse" id="pulse"></div></div>
-    <div style="text-align:center"><span class="bpm-unit">BPM</span></div>
+    <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-top:4px"><span class="bpm-unit">BPM</span><div class="pulse" id="pulse"></div></div>
     <div class="pulse-dots" id="dots"></div>
 
     <div class="transport">
@@ -201,7 +200,7 @@
     <div class="tweak">
       <button id="minus">–</button>
       <div class="sig">
-        compás <b id="sigLabel">4/4</b> · toca para cambiar
+        compás <b id="sigLabel">4/4</b>
       </div>
       <button id="plus">+</button>
     </div>
