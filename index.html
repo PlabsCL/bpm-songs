@@ -116,9 +116,7 @@
   }
   .nudge:active{background:var(--line);}
   .nudge:disabled{opacity:.3;cursor:default;}
-  .song .name sup{color:var(--amber);font-size:13px;margin-left:2px;}
   .foot{font-size:11px;color:var(--dim);text-align:center;padding:14px 0 4px;line-height:1.6;}
-  .foot sup{color:var(--amber);}
   .tweak{display:flex;align-items:center;gap:10px;margin-top:8px;}
   .tweak button{
     width:40px;height:36px;border-radius:10px;border:1px solid var(--line);
@@ -223,28 +221,28 @@ const SIGS = [3,4,5,6];
 
 /* ---------- Lista base (editar aquí para cambiarla para todos) ---------- */
 const DEFAULT_SONGS = [
-  {name:'La Rubia Tarada', bpm:122},
-  {name:'You Give Love A Bad Name', bpm:123},
-  {name:'No Me Arrepiento de Este Amor', bpm:95},
-  {name:'Epic', bpm:87, mark:true},
-  {name:'Plush', bpm:72, mark:true},
-  {name:'Drive', bpm:90},
+  {name:'La Rubia Tarada', bpm:123},
+  {name:'You Give Love A Bad Name', bpm:124},
+  {name:'No Me Arrepiento de Este Amor', bpm:192},
+  {name:'Epic', bpm:174},
+  {name:'Plush', bpm:147},
+  {name:'Drive', bpm:91},
   {name:'Crazy Train', bpm:138},
-  {name:'Alive', bpm:76, mark:true},
-  {name:'Even Flow', bpm:105},
-  {name:'Enter Sandman', bpm:123},
-  {name:'Mejor No Hablar de Ciertas Cosas', bpm:176},
-  {name:'Whiskey In The Jar', bpm:90, mark:true},
-  {name:'Persiana Americana', bpm:101, mark:true},
+  {name:'Alive', bpm:76},
+  {name:'Even Flow', bpm:104},
+  {name:'Enter Sandman', bpm:124},
+  {name:'Mejor No Hablar de Ciertas Cosas', bpm:174},
+  {name:'Whiskey In The Jar', bpm:134},
+  {name:'Persiana Americana', bpm:101},
   {name:'Los Viejos Vinagres', bpm:125},
   {name:'La Guitarra', bpm:147},
 ];
 function defaultSongs(){
-  return DEFAULT_SONGS.map((s,i)=>({id:'d'+i, name:s.name, bpm:s.bpm, mark:!!s.mark}));
+  return DEFAULT_SONGS.map((s,i)=>({id:'d'+i, name:s.name, bpm:s.bpm}));
 }
 
 /* ---------- Almacenamiento permanente en el teléfono ---------- */
-const STORE_KEY='bpmsongs_v1';
+const STORE_KEY='bpmsongs_v2';
 function load(){
   songs=defaultSongs();
   try{
@@ -324,7 +322,7 @@ function selectSong(id){
   if(playing) stop();
   activeId=id;
   const s=songs.find(x=>x.id===id);
-  document.getElementById('nowTitle').textContent=s.name+(s.mark?' *':'');
+  document.getElementById('nowTitle').textContent=s.name;
   document.getElementById('nowTitle').classList.remove('empty');
   document.getElementById('bpmBig').textContent=s.bpm;
   document.getElementById('playBtn').disabled=false;
@@ -346,7 +344,7 @@ function render(){
     row.className='song'+(s.id===activeId?' active':'');
     row.innerHTML=`
       <span class="idx">${String(i+1).padStart(2,'0')}</span>
-      <div class="meta"><div class="name">${escapeHtml(s.name)}${s.mark?'<sup>*</sup>':''}</div></div>
+      <div class="meta"><div class="name">${escapeHtml(s.name)}</div></div>
       <div class="bpm">${s.bpm}<small>BPM</small></div>
       <button class="del" data-id="${s.id}">×</button>`;
     row.addEventListener('click',e=>{ if(e.target.classList.contains('del'))return; selectSong(s.id); });
@@ -364,8 +362,7 @@ function render(){
   });
   const foot=document.createElement('div');
   foot.className='foot';
-  foot.innerHTML=(songs.some(s=>s.mark)?'<sup>*</sup> marcado en la setlist original<br>':'')
-    +'Tus cambios se guardan solo en este teléfono.';
+  foot.innerHTML='Tus cambios se guardan solo en este teléfono.';
   list.appendChild(foot);
 }
 
